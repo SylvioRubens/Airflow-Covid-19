@@ -138,6 +138,11 @@ calc5 = PythonOperator(
     python_callable = new_vaccinations_per_country,
     dag=dag
 )
+trigger_dag2 = TriggerDagRunOperator(
+    task_id = 'trigger_dag2',
+    trigger_dag_id = 'exercício_dag2',
+    dag=dag
+)
 
 
-ingestion >> [calc1, calc2, calc3, calc4, calc5]
+ingestion >> [calc1, calc2, calc3, calc4, calc5] >> trigger_dag2
